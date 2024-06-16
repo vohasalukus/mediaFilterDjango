@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Книги</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="main-content">
+            <h1>Книги</h1>
+            <ul class="book-list">
+                {% for book in books %}
+                    <li>{{ book.title }} by {{ book.author.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="sidebar">
+            <div class="category-list">
+                <h2>Список категорий</h2>
+                <ul>
+                    {% for category in categories %}
+                        <li><a href="{% url 'books_by_category' slug=category.slug %}">{{ category.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="author-list">
+                <h2>Список авторов</h2>
+                <ul>
+                    {% for author in authors %}
+                        <li><a href="{% url 'books_by_author' slug=author.slug %}">{{ author.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
